@@ -1,0 +1,71 @@
+<div>
+    <label>Search Product:</label>
+    <input type="text" name="txtSearch" [(ngModel)]="SearchText" >
+       <input type="button" name="btnSearch" value="Search" (click)="Search()"> 
+</div>
+<br>
+
+<div>
+    <h2>The Service Calls</h2>
+    <form name="frmProduct">
+        <div>
+            <label>Product Row Id</label>
+            <input type="text" name="ProductRowId" readonly [(ngModel)]="product.ProductRowId">
+        </div>
+        <div>
+            <label>Product Id</label>
+            <input type="text" name="ProductId" [(ngModel)]="product.ProductId">
+        </div>
+        <div>
+            <label>Product Name</label>
+            <input type="text" name="ProductName" [(ngModel)]="product.ProductName">
+        </div>
+        <div>
+            <label>Categories</label>
+            <select name="CategoryName" [(ngModel)]="product.CategoryName">
+        <option *ngFor="let c of categories" value="{{c}}">{{c}}</option>
+      </select>
+        </div>
+        <div>
+            <label>Manufacturers</label>
+            <select name="Manufacturer" [(ngModel)]="product.Manufacturer">
+        <option *ngFor="let m of manufacturers" value="{{m}}">{{m}}</option>
+      </select>
+        </div>
+        <div>
+            <label>Description</label>
+            <input name="Description" type="text" [(ngModel)]="product.Description">
+        </div>
+        <div>
+            <label>Base Price</label>
+            <input type="text" name="BasePrice" [(ngModel)]="product.BasePrice">
+        </div>
+        <div>
+            <input type="button" value="Clear" (click)="clear()">
+            <input type="button" value="{{ProductButtonName}}" (click)="save()">
+        </div>
+    </form>
+</div>
+<hr>
+<div>
+    <strong>{{status}}</strong>
+</div>
+<!--Dynamic Table Generation-->
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let h of headers">{{h}}</th>
+         <th>Delete</th>
+          &nbsp; <th>Select</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products">
+            <td *ngFor="let h of headers">{{prd[h]}}</td>
+            <td (click)="Delete(prd)">Delete</td>
+         &nbsp;   <td (click)="getSelectedProduct(prd)">Select</td>
+            
+        </tr>
+        
+    </tbody>
+</table>
